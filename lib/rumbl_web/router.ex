@@ -30,7 +30,6 @@ defmodule RumblWeb.Router do
     resources "/videos", VideoController
   end
 
-
   # Other scopes may use custom stacks.
   # scope "/api", RumblWeb do
   #   pipe_through :api

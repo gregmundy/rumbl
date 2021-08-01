@@ -1,4 +1,3 @@
-
 defmodule Rumbl.Multimedia do
   @moduledoc """
   The Multimedia context.
