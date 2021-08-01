@@ -7,6 +7,7 @@ defmodule RumblWeb.AuthTest do
       conn
       |> bypass_through(RumblWeb.Router, :browser)
       |> get("/")
+
     {:ok, %{conn: conn}}
   end
 
@@ -20,6 +21,7 @@ defmodule RumblWeb.AuthTest do
       conn
       |> assign(:current_user, %Rumbl.Accounts.User{})
       |> Auth.authenticate_user([])
+
     refute conn.halted
   end
 
@@ -28,6 +30,7 @@ defmodule RumblWeb.AuthTest do
       conn
       |> Auth.login(%Rumbl.Accounts.User{id: 123})
       |> send_resp(:ok, "")
+
     next_conn = get(login_conn, "/")
     assert get_session(next_conn, :user_id) == 123
   end
@@ -38,16 +41,19 @@ defmodule RumblWeb.AuthTest do
       |> put_session(:user_id, 123)
       |> Auth.logout()
       |> send_resp(:ok, "")
+
     next_conn = get(logout_conn, "/")
     refute get_session(next_conn, :user_id)
   end
 
   test "call places user from session into assigns", %{conn: conn} do
     user = user_fixture()
+
     conn =
       conn
       |> put_session(:user_id, user.id)
       |> Auth.call(Auth.init([]))
+
     assert conn.assigns.current_user.id == user.id
   end
 

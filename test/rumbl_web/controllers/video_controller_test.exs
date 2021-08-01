@@ -13,7 +13,8 @@ defmodule RumblWeb.VideoControllerTest do
     @create_attrs %{
       url: "http://youtu.be",
       title: "vod",
-      description: "a vid"}
+      description: "a vid"
+    }
 
     @invalid_attrs %{title: "invalid"}
 
@@ -36,7 +37,7 @@ defmodule RumblWeb.VideoControllerTest do
 
       assert %{id: id} = redirected_params(create_conn)
       assert redirected_to(create_conn) == Routes.video_path(create_conn, :show, id)
-      conn = get conn, Routes.video_path(conn, :show, id)
+      conn = get(conn, Routes.video_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Show Video"
       assert Multimedia.get_video!(id).user_id == user.id
     end
