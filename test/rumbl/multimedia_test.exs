@@ -15,7 +15,8 @@ defmodule Rumbl.MultimediaTest do
               Multimedia.list_alphabetical_categories() do
           name
         end
-        assert alpha_names == ~w(Action Comedy Drama)
+
+      assert alpha_names == ~w(Action Comedy Drama)
     end
   end
 
@@ -83,6 +84,5 @@ defmodule Rumbl.MultimediaTest do
       video = video_fixture(owner)
       assert %Ecto.Changeset{} = Multimedia.change_video(video)
     end
-
   end
 end
