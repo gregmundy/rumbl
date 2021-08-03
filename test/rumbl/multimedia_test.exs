@@ -84,5 +84,15 @@ defmodule Rumbl.MultimediaTest do
       video = video_fixture(owner)
       assert %Ecto.Changeset{} = Multimedia.change_video(video)
     end
+
+    @tag :wip
+    test "a slug should be generated for a video" do
+      owner = user_fixture()
+      video = video_fixture(owner, %{title: "a REALLY complicated TITLE goES 4 here"})
+      IO.inspect(video)
+      assert %Multimedia.Video{} = video
+      assert video.slug == "a-really-complicated-title-goes-4-here"
+    end
+
   end
 end
